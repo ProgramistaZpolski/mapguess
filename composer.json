@@ -1,0 +1,9 @@
+{
+	"name": "h/application",
+	"description": "A website",
+	"autoload": {
+		"classmap": [
+			"./"
+		]
+	}
+}
