@@ -1,2 +1,2 @@
 # mapguess
-Gra o zgadywaniu państw na podstawie mapy
+Gra o zgadywaniu państw na podstawie mapy, na razie w wersji Alpha
