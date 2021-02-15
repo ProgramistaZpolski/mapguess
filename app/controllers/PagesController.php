@@ -88,22 +88,4 @@ class PagesController
 			\Ignite(510);
 		}
 	}
-
-	public function api()
-	{
-		Forms::validate([
-			"count" => ["required", "max:7", "number"]
-		], function () {
-			\Ignite(412);
-		});
-		$h = [
-			"Kukanq ogląda hetaje",
-			"kukanq to taki bardzo bardzo super super kasztan, co lubi anime i fapie do 420 letnich dziewczynek, ogółem niefajny człowiek",
-			"Pan koza pisze śmieci w batchu",
-			"Sieciaki nie lubią sieciuchów",
-			"Wycinek i szkic to bloat i do tego jest podróbką narzędzie wycinanie",
-			"Creper132 tworzy śmieciowe \"wirusy\""
-		];
-		return Arr::random($h, $_GET["count"]);
-	}
 }
