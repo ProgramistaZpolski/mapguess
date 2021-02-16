@@ -20,7 +20,8 @@ class PopulateTableMigration
 		(6, '006.png', 'Isle Of Man,United Kingdom'),
 		(7, '007.png', 'Panama,Columbia'),
 		(8, '008.jpg', 'Finland,Russia'),
-		(9, '009.png', 'France,United Kingdom');
+		(9, '009.png', 'France,United Kingdom'),
+		(10, '010.png', 'Poland,Russia');
 		
 		ALTER TABLE `maps`
   			ADD PRIMARY KEY (`id`);
