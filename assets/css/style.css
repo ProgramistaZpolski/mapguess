@@ -1318,3 +1318,13 @@ table thead {
 img {
 	width: 80%;
 }
+
+body {
+	margin-top: 10px;
+	text-align: center;
+}
+
+fieldset {
+	margin: 2rem;
+	padding: 1rem;
+}

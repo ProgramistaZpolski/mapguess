@@ -43,8 +43,7 @@ class PagesController
 		return $result[0];
 	}
 
-	public function home()
-	{
+	protected function startGame() {
 		$data = Arr::random(App::get("database")->selectAll("maps"));
 		$countries = explode(",", $data[0]->countries);
 		$place = [];
@@ -62,9 +61,19 @@ class PagesController
 
 		shuffle($place);
 
-		return view('game', [
-			"map" => asset("maps/" . $data[0]->filename),
+		return [
+			"filename" => $data[0]->filename,
 			"place" => $place
+		];
+	}
+
+	public function home()
+	{
+		$game = $this->startGame();
+		return view('game', [
+			"map" => asset("maps/" . $game["filename"]),
+			"place" => $game["place"],
+			"won" => "notyet"
 		]);
 	}
 
@@ -76,16 +85,24 @@ class PagesController
 		});
 		$result = App::get("database")->sql("SELECT * FROM `maps` WHERE `filename` = '" . explode("/", $_POST["map"])[3] . "'");
 		$countries = explode(",", $result[0]->countries);
-		$valid = true;
+		$countriesFiltered = [];
+		$postFiltered = [];
+		unset($_POST["map"]);
 		foreach ($countries as $country) {
-			if (!array_key_exists(str_replace(' ', '', $country), $_POST)) {
-				$valid = false;
-			}
+			array_push($countriesFiltered, str_replace(" ", "", $country));
 		}
-		if ($valid) {
-			\Ignite(200);
-		} else {
-			\Ignite(510);
+		foreach ($_POST as $key => $value) {
+			array_push($postFiltered, $key);
 		}
+		sort($postFiltered);
+		sort($countriesFiltered);
+
+		$game = $this->startGame();
+
+		return view('game', [
+			"map" => asset("maps/" . $game["filename"]),
+			"place" => $game["place"],
+			"won" => $postFiltered === $countriesFiltered
+		]);
 	}
 }

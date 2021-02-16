@@ -83,6 +83,7 @@ if ($argv[1] == "controller") {
 	// I spend like half an hour on these stupid regex-es
 	$template = preg_replace("/@extends\('([a-z]*)'\)/i", "<?php require_once('partials/$1.php'); ?>", $template);
 	$template = preg_replace("/@if \(([^@]*)\)/i", "<?php if ($1) : ?>", $template);
+	$template = preg_replace("/@elseif \(([^@]*)\)/i", "<?php elseif ($1) : ?>", $template);
 	$template = preg_replace("/@foreach \(([^)-]*)\)/i", "<?php foreach ($1) : ?>", $template);
 	file_put_contents("app/views/{$argv[2]}.view.php", "<?php /* Compiled from a Blade Template on " . Date("d-m-Y H:i:s") . " */ ?>\n" . $template);
 	echo "Compiled!";
